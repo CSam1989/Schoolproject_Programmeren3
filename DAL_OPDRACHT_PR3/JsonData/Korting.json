@@ -1,0 +1,22 @@
+[
+  {
+    "LeeftijdVan": "0",
+    "LeeftijdTot": "1",
+    "Coefficient": "0"
+  },
+  {
+    "LeeftijdVan": "2",
+    "LeeftijdTot": "4",
+    "Coefficient": "0.25"
+  },
+  {
+    "LeeftijdVan": "5",
+    "LeeftijdTot": "12",
+    "Coefficient": "0.5"
+  },
+  {
+    "LeeftijdVan": "13",
+    "LeeftijdTot": "99",
+    "Coefficient": "1"
+  }
+]

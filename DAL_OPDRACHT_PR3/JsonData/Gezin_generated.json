@@ -1,0 +1,26 @@
+[
+  {
+    "GezinsNaam": "Carey",
+    "Straat": "Newport Street",
+    "Huisnummer": 162,
+    "GemeenteID": 19
+  },
+  {
+    "GezinsNaam": "Hanson",
+    "Straat": "Conover Street",
+    "Huisnummer": 576,
+    "GemeenteID": 9
+  },
+  {
+    "GezinsNaam": "Nixon",
+    "Straat": "Goodwin Place",
+    "Huisnummer": 359,
+    "GemeenteID": 10
+  },
+  {
+    "GezinsNaam": "Barber",
+    "Straat": "Glendale Court",
+    "Huisnummer": 859,
+    "GemeenteID": 9
+  }
+]
