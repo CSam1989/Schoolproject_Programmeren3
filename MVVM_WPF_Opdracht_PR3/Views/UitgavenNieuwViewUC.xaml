@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="MVVM_WPF_Opdracht_PR3.Views.UitgavenNieuwViewUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVM_WPF_Opdracht_PR3.Views"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding UitgavenNieuw, Source={StaticResource Locator}}">
+    <!--region Form-->
+    <StackPanel Orientation="Vertical"
+                HorizontalAlignment="Left"
+                Grid.Row="1" Margin="20,0">
+        <ComboBox
+            ItemsSource="{Binding LijstGezinnen,
+            ValidatesOnDataErrors=True}"
+            DisplayMemberPath="Gezinsnaam"
+            SelectedValue="{Binding Gezin}"
+            Margin="5,0,5,10" Width="250"
+            materialDesign:HintAssist.Hint="Gezin"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+        </ComboBox>
+
+        <TextBox
+            Text="{Binding Plaats}"
+            Margin="5,10" Width="250"
+            MaxLength="50"
+            materialDesign:HintAssist.Hint="Plaats"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+        <TextBox
+            Text="{Binding Prijs,
+            ValidatesOnDataErrors=True}"
+            Margin="5,10" Width="250"
+            materialDesign:HintAssist.Hint="Prijs (in EUR)"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        
+        <DatePicker
+            SelectedDate="{Binding UitgaveDatum}"
+            Margin="5,10" Width="250"
+            materialDesign:HintAssist.Hint="Datum uitgave"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+
+        <TextBox
+            Text="{Binding Opmerking}"
+            TextWrapping="Wrap"
+            VerticalAlignment="Stretch"
+            Margin="5,10" Width="250" 
+            Height="Auto" MaxHeight="100"
+            MaxLength="255"
+            AcceptsReturn="True"
+            VerticalScrollBarVisibility="Auto"
+            SpellCheck.IsEnabled="True"
+            materialDesign:HintAssist.Hint="Opmerking"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            />
+
+        <StackPanel Margin="5" Width="250" Orientation="Horizontal">
+            <Grid
+                Width="120" Margin="0,0,5,0">
+                <Button 
+                    Command="{Binding UitgaveToevoegen}"
+                    Height="50"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5">
+                        <TextBlock
+                        Text="Toevoegen" />
+                </Button>
+            </Grid>
+            <Grid
+                Width="120" Margin="5,0,0,0">
+                <Button 
+                    Command="{Binding Annuleren}"
+                    Height="50"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    materialDesign:ButtonAssist.CornerRadius="5">
+                    <TextBlock
+                        Text="Annuleren" />
+                </Button>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+    <!--endregion-->
+</UserControl>

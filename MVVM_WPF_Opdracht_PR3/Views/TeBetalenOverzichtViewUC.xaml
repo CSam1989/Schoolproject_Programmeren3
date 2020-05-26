@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="MVVM_WPF_Opdracht_PR3.Views.TeBetalenOverzichtViewUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVM_WPF_Opdracht_PR3.Views"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding TeBetalenOverzicht, Source={StaticResource Locator}}">
+    <Grid>
+        <!--region Definitions-->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <!--endregion-->
+        
+        <ListView
+            ItemsSource="{Binding DictTeBetalenPerGezin}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Key}"
+                        Header="Gezin" />
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Value,StringFormat='€ {0:N2}'}"
+                        Header="Te Betalen" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Left">
+            <TextBlock 
+                Text="Druk enkel op deze knop als alle gezinnen betaald hebben!"
+                Margin="5"/>
+            
+            <!--region Button-->
+            <materialDesign:DialogHost
+                  DialogClosing="DialogHost_DialogClosing"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                    IsOpen="{Binding IsOpen}">
+                <!--IsOpen is gebind aan een property in u ViewModel waarbij je in u RelayCommands kan zeggen of IsDialogOpen false of true is-->
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel
+                        Margin="16">
+                        <TextBlock Margin="5">
+                            Bent u zeker dat u alles wilt verwerken? U kunt dit niet meer terugdraaien
+                        </TextBlock>
+                        <TextBlock Margin="5">
+                            U navigeert hierna naar de HomePagina
+                        </TextBlock>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                            <Button
+                                  Command="{Binding TeBetalenVerwerkenCommand}"
+                                  Style="{StaticResource MaterialDesignFlatButton}"
+                                  IsDefault="True" Margin="0 8 8 0"
+                                  Content="JA"/>
+
+                            <Button
+                                  Command="materialDesign:DialogHost.CloseDialogCommand"
+                                  Style="{StaticResource MaterialDesignFlatButton}"
+                                  IsCancel="True" Margin="0 8 8 0"
+                                  Content="NEE"/>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+                <Grid HorizontalAlignment="Left"
+                    Width="124">
+                    <Button
+                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Height="50"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                        <TextBlock
+                            Text="Verwerken" />
+                    </Button>
+                </Grid>
+            </materialDesign:DialogHost>
+            <!--endregion-->
+        </StackPanel>
+    </Grid>
+</UserControl>

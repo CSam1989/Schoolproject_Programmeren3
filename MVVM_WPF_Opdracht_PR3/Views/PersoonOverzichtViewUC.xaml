@@ -1,0 +1,171 @@
+﻿<UserControl x:Class="MVVM_WPF_Opdracht_PR3.Views.PersoonOverzichtViewUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVM_WPF_Opdracht_PR3.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding PersoonOverzicht, Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <WrapPanel>
+        <ItemsControl ItemsSource="{Binding LijstGezinnen}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <materialDesign:Flipper
+                        Style="{StaticResource MaterialDesignCardFlipper}"
+                        Width="250">
+                        <materialDesign:Flipper.FrontContent>
+                            <Grid 
+                                Margin="0 6 0 0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock
+                                    Text="Familie:"
+                                    Margin="5"
+                                    Grid.Row="0" Grid.Column="0"/>
+                                <TextBlock
+                                    Text="Adres:"
+                                    Margin="5"
+                                    Grid.Row="1" Grid.Column="0"/>
+                                <TextBlock
+                                    Text="Gemeente:"
+                                    Margin="5"
+                                    Grid.Row="2" Grid.Column="0"/>
+                                <TextBlock
+                                    Text="KortingsCoefficient:"
+                                    Margin="5"
+                                    Grid.Row="3" Grid.Column="0"/>
+
+                                <TextBlock 
+                                    Text="{Binding Gezinsnaam}"
+                                    Margin="5"
+                                    Grid.Row="0" Grid.Column="1"/>
+                                <StackPanel
+                                    Margin="5"
+                                    Grid.Row="1" Grid.Column="1"
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        Text="{Binding Straat}"/>
+                                    <TextBlock Text=" "/>
+                                    <TextBlock
+                                        Text="{Binding Huisnummer}"/>
+                                </StackPanel>
+                                <StackPanel
+                                    Margin="5"
+                                    Grid.Row="2" Grid.Column="1"
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        Text="{Binding Gemeente.Postcode}"/>
+                                    <TextBlock Text=" "/>
+                                    <TextBlock
+                                        Text="{Binding Gemeente.GemeenteNaam}"/>
+                                </StackPanel>
+                                <TextBlock 
+                                    Text="{Binding Korting}"
+                                    Margin="5"
+                                    Grid.Row="3" Grid.Column="1"/>
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                    Margin="5" Width="192"
+                                    Grid.Row="4" Grid.ColumnSpan="2">
+                                    Meer Info
+                                </Button>
+                            </Grid>
+                        </materialDesign:Flipper.FrontContent>
+                        <materialDesign:Flipper.BackContent>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone
+                                        Mode="PrimaryLight"
+                                        Padding="6">
+                                    <StackPanel
+                                            Orientation="Horizontal">
+                                        <Button
+                                                Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                                HorizontalAlignment="Left">
+                                            <materialDesign:PackIcon
+                                                    Kind="ArrowLeft"
+                                                    HorizontalAlignment="Right" />
+                                        </Button>
+                                        <StackPanel
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center">
+                                            <TextBlock 
+                                                Text="Fam. "
+                                                Margin="8 0 0 0"/>
+                                            <TextBlock 
+                                                Text="{Binding Gezinsnaam}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </materialDesign:ColorZone>
+                                <ItemsControl
+                                    ItemsSource="{Binding Personen}"
+                                    Grid.Row="1"
+                                    Margin="0 6 0 0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel 
+                                                Orientation="Horizontal"
+                                                Margin="5"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Top">
+                                                <TextBlock Text="{Binding Naam}"/>
+                                                <TextBlock Text=" "/>
+                                                <TextBlock Text="{Binding Voornaam}"/>
+                                                <TextBlock Text=" ("/>
+                                                <TextBlock Text="{Binding Leeftijd}"/>
+                                                <TextBlock Text=" jaar)"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                        </materialDesign:Flipper.BackContent>
+                    </materialDesign:Flipper>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </WrapPanel>
+</UserControl>
